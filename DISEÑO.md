@@ -56,3 +56,13 @@ legible, sin logotipos ni personas reconocibles.
 - Fondo oscuro general con rayas de advertencia o botones en paralelogramo (es `gimnasio-deporte`).
 - Duotono de las fotos, cinta corrida o pegatina redonda (es `musica-espectaculos`).
 - Tarjetas blancas en caja centrada estrecha.
+
+## Páginas propias (fichas)
+Con la misma piel que la portada: cabecera y pie de la plantilla, migas (Inicio › Sección › Elemento), hero con la foto del
+elemento (sin foto, su icono), `detalle` en párrafos, tabla de datos, caja de contacto, galería (`imagenes`) y otros elementos
+de la misma lista.
+
+Fichas de clases (`/clases/<slug>/`): cabecera en banda azul con líneas de pista y corte diagonal abajo, título condensado en
+cursiva con la última palabra en lima, foto de la clase cortada en diagonal (sin foto, sello lima con icono), marcador
+grafito con los datos y caja lima con la clase de prueba, galería en banda grafito con raya lima y «Otras clases» en
+banda clara2 con corte y tarjetas de borde superior azul.

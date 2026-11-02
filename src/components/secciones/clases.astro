@@ -2,12 +2,14 @@
 // Escuela sobre claro: con `imagen`, fila partida con la foto a sangre hasta el borde izquierdo y cortada en diagonal
 // (en móvil, arriba con el corte abajo); al lado, titular y las clases en filas de marcador:
 // `clases: [{nombre, texto, nivel, precio, duracion}]`. Sin foto, las clases van a dos columnas. Sin precio no hay
-// precio. `cta` opcional (clase de prueba).
+// precio. Las clases con `detalle` tienen página propia (/clases/<slug>/) y su nombre es el enlace; las demás, como antes.
+// `cta` opcional (clase de prueba).
 import { seccion } from '../../data/site';
 import { altSeccion } from '../../lib/seo';
 import Titular from '../ui/Titular.astro';
 import Imagen from '../ui/Imagen.astro';
 import Icono from '../ui/Icono.astro';
+import { enlaceDe } from '../../lib/paginas';
 interface Props { id: string }
 const { id } = Astro.props;
 const s = seccion(id);
@@ -30,13 +32,14 @@ const clases = s?.clases ?? [];
               <li class="clase">
                 <div class="min-w-0">
                   <div class="clase-cab">
-                    <h3 class="clase-nombre">{c.nombre}</h3>
+                    <h3 class="clase-nombre">{enlaceDe(c) ? <a href={enlaceDe(c)} class="clase-enlace">{c.nombre}</a> : c.nombre}</h3>
                     {c.nivel && <span class="chip chip--azul">{c.nivel}</span>}
                   </div>
                   {c.texto && <p class="clase-texto">{c.texto}</p>}
                   {c.duracion && (
                     <p class="clase-duracion"><Icono nombre="cronometro" tam={18} />{c.duracion}</p>
                   )}
+                  {enlaceDe(c) && <span class="clase-ver" aria-hidden="true">Ver más <Icono nombre="flecha" tam={16} /></span>}
                 </div>
                 {c.precio && <p class="clase-precio">{c.precio}</p>}
               </li>
@@ -55,7 +58,13 @@ const clases = s?.clases ?? [];
   .clases-cuerpo { padding-block: var(--ritmo); }
   .clases--foto .clases-cuerpo { padding-inline: 1rem; padding-top: 2.5rem; }
   .clases-lista { margin-top: 2.5rem; display: grid; column-gap: 3rem; }
-  .clase { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; align-items: start; padding-block: 1.25rem; border-top: 2px solid var(--linea); }
+  .clase-enlace { color: inherit; text-decoration: none; }
+  .clase-enlace::after { content: ""; position: absolute; inset: 0; }
+  .clase-enlace:focus-visible { outline: none; }
+  .clase:has(.clase-enlace:focus-visible) { outline: 3px solid var(--c-primario); outline-offset: 2px; }
+  .clase:has(.clase-enlace):hover .clase-nombre { text-decoration: underline; text-decoration-color: var(--c-acento); text-decoration-thickness: .25rem; }
+  .clase-ver { margin-top: .6rem; display: inline-flex; align-items: center; gap: .3rem; font-weight: 750; font-size: .9rem; color: var(--resalte-texto); }
+  .clase { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; align-items: start; padding-block: 1.25rem; border-top: 2px solid var(--linea); }
   .clase-cab { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; }
   .clase-nombre { font-size: clamp(1.6rem, 2.4vw, 2.1rem); }
   .clase-texto { margin-top: .45rem; font-size: .98rem; opacity: .85; }

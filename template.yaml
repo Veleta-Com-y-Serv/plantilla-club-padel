@@ -22,11 +22,15 @@ secciones:
   - { id: contacto, nombre: Contacto }
 estilo: energico
 plan_minimo: gratis
-version: 1.0.0
+version: 1.1.0
 base: astrowind
 demo_url: https://demo-plantilla-club-padel.noexpertise.com
 activa: true
 orden: 570
+
+# Páginas propias (docs/plantillas.md § Fichas por elemento y páginas por zona). Espejo en src/data/fichas.ts.
+fichas:
+  - { lista: clases, campo: clases, ruta: clases, nombre: Clase, tipo: Service }
 
 # Asistente de puesta en marcha (NoExpertise): un paso por pantalla. Rutas del site sin índices;
 # tipos: texto y lista (la IA propone), datos, fotos, eleccion (colores y logo) y repaso.

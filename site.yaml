@@ -83,10 +83,62 @@ secciones:
     imagen: /fotos/clases.jpg
     cta: { texto: Pide tu clase de prueba, url: "/#contacto" }
     clases:
-      - { nombre: Iniciación, texto: "Agarre, posición y los golpes básicos para empezar a jugar partidos.", nivel: Principiante, precio: "45 € / mes", duracion: "1 h a la semana" }
-      - { nombre: Perfeccionamiento, texto: "Bandeja, víbora y salida de pared. Para quien ya juega y quiere dar el salto.", nivel: Intermedio, precio: "55 € / mes", duracion: "1 h a la semana" }
-      - { nombre: Competición, texto: "Táctica, físico y preparación de torneos con análisis en vídeo.", nivel: Avanzado, precio: "80 € / mes", duracion: "2 h a la semana" }
-      - { nombre: Escuela infantil, texto: "De 6 a 14 años, con pala adaptada y mucho juego.", nivel: Niños, precio: "35 € / mes", duracion: "1 h a la semana" }
+      - nombre: Iniciación
+        texto: "Agarre, posición y los golpes básicos para empezar a jugar partidos."
+        nivel: Principiante
+        precio: "45 € / mes"
+        duracion: "1 h a la semana"
+        imagenes: "/fotos/pista-cubierta.jpg; /fotos/galeria-1.jpg"
+        detalle: |
+          La clase de iniciación es el punto de partida para quien nunca ha cogido una pala o lo ha hecho solo de vez en cuando con amigos. Trabajamos en grupos reducidos, con monitor titulado, para que cada alumno reciba correcciones desde el primer día y nadie se quede mirando desde la valla.
+
+          Empezamos por lo esencial: cómo agarrar la pala, dónde colocarse en la pista, cómo moverse con pasos cortos y qué hacer con la pared. Después llegan la derecha, el revés, el saque y la volea sencilla, siempre con ejercicios de cesta y mucho juego para que se note el avance.
+
+          Al terminar el mes sabrás puntuar, mover los pies con criterio y disputar un partido amistoso sin perderte. La pala de prueba está disponible en recepción, así que no hace falta comprar nada antes de saber si te engancha.
+
+          Es una buena opción para adultos que quieren moverse sin presión, para parejas que desean aprender juntas y para quien busca un grupo con el que jugar los fines de semana.
+      - nombre: Perfeccionamiento
+        texto: "Bandeja, víbora y salida de pared. Para quien ya juega y quiere dar el salto."
+        nivel: Intermedio
+        precio: "55 € / mes"
+        duracion: "1 h a la semana"
+        imagenes: "/fotos/pista-central.jpg; /fotos/galeria-2.jpg"
+        detalle: |
+          Esta clase es para jugadores que ya se defienden en un partido y notan que se estancan: pierden la red, no saben cerrar los puntos o se desordenan cuando el rival sube la intensidad. El objetivo es convertir el juego que ya tienes en un juego con intención.
+
+          Cada sesión se centra en un golpe o en una situación de partido. Practicamos la bandeja y la víbora con control de profundidad, la salida de pared en defensa, el globo para recuperar la red y la comunicación con tu pareja. El monitor graba algunos puntos en vídeo y los revisáis juntos al final para ver qué se puede mejorar.
+
+          El grupo se forma por nivel real, no por edad, de modo que todos van a un ritmo parecido y los ejercicios resultan exigentes sin ser frustrantes. Se juegan puntos reducidos y partidillos para llevar lo aprendido a una situación parecida a la competición.
+
+          Encaja con quien juega a menudo con amigos, con quien quiere prepararse para la liga por niveles del club y con quien desea subir de categoría con una base técnica sólida.
+      - nombre: Competición
+        texto: "Táctica, físico y preparación de torneos con análisis en vídeo."
+        nivel: Avanzado
+        precio: "80 € / mes"
+        duracion: "2 h a la semana"
+        imagenes: "/fotos/pista-exterior.jpg; /fotos/galeria-3.jpg"
+        detalle: |
+          El grupo de competición está pensado para jugadores que ya compiten o quieren hacerlo en serio. Aquí se habla de plan de partido, de lectura del rival y de cómo mantener el nivel cuando el marcador aprieta, además de pulir los golpes más finos.
+
+          Cada semana combinamos trabajo técnico, ejercicios tácticos por parejas y un bloque de preparación física específica del pádel: desplazamientos laterales, explosividad en las salidas, movilidad de hombro y prevención de lesiones. El monitor analiza los partidos en vídeo y marca con vosotros los patrones que se repiten.
+
+          Antes de cada torneo del club se diseña una preparación concreta, con simulaciones de partido y ajuste de la pareja según el cuadro. Después del torneo se revisa lo ocurrido sin dramatismos, buscando qué conservar y qué cambiar.
+
+          Es una clase exigente y con compromiso de asistencia, porque el trabajo se acumula. A cambio, ofrece un grupo estable de gente con la misma ambición y un seguimiento mucho más personal que el de una clase general.
+      - nombre: Escuela infantil
+        texto: "De 6 a 14 años, con pala adaptada y mucho juego."
+        nivel: Niños
+        precio: "35 € / mes"
+        duracion: "1 h a la semana"
+        imagenes: "/fotos/galeria-4.jpg; /fotos/galeria-5.jpg"
+        detalle: |
+          La escuela infantil acerca el pádel a los más pequeños desde el juego. Los grupos se organizan por edad y por destreza, con palas y bolas adaptadas, para que los niños disfruten desde el primer día y quieran volver la semana siguiente.
+
+          Las sesiones combinan ejercicios de coordinación, pequeños retos por equipos y partidillos cortos. Los monitores enseñan los golpes básicos sin agobiar, cuidan la postura y la seguridad en la pista y fomentan valores como el compañerismo, el respeto al rival y las ganas de mejorar.
+
+          Cuando los alumnos van ganando soltura, se les anima a participar en pequeñas jornadas de juego del club, siempre sin presión. Las familias pueden ver el progreso desde la grada y hablar con el monitor al terminar la clase para conocer cómo evoluciona cada niño.
+
+          Es una buena manera de que los niños hagan deporte en un ambiente sano, aprendan a perder y a ganar, y compartan afición con amigos de su edad en las instalaciones del club.
       - { nombre: Clase particular, texto: "Tú y el monitor, a tu ritmo y en el horario que elijas.", nivel: Todos, precio: "30 € / sesión", duracion: "60 min" }
 
   torneos:
