@@ -1,0 +1,107 @@
+---
+// Pie azul a todo el ancho con las líneas de pista de fondo: franja lima en diagonal con el eslogan y el botón de la
+// cabecera; debajo, el nombre en condensada cursiva y cuatro columnas (el club y redes, contacto, la web y el próximo
+// torneo con el horario). «Web creada con NoExpertise» se muestra si site.yaml → marca_pie no es false.
+import { site, tel, mapa, whatsapp, proximoTorneo } from '../data/site';
+import Icono from './ui/Icono.astro';
+interface Props { variante?: string }
+const { variante = 'azul' } = Astro.props;
+const c = site.contacto;
+const redes = Object.entries(site.redes).filter(([, url]) => url);
+const anio = new Date().getFullYear();
+const proximo = proximoTorneo();
+const hayContacto = c.telefono || c.whatsapp || c.email || c.direccion;
+const cta = site.boton_cabecera;
+---
+
+<footer class={`pie pie--${variante} lineas-pista`}>
+  {
+    (site.eslogan || cta) && (
+      <div class="pie-franja banda-lima">
+        <div class="contenedor pie-franja-fila">
+          {site.eslogan && <p class="pie-franja-texto">{site.eslogan}</p>}
+          {cta && <a class="btn" href={cta.url}>{cta.texto}</a>}
+        </div>
+      </div>
+    )
+  }
+  <div class="contenedor pie-rejilla pie-cuerpo">
+    <div class="pie-marca">
+      <p class="pie-nombre">{site.nombre}</p>
+      {
+        redes.length > 0 && (
+          <ul class="pie-redes">
+            {redes.map(([red, url]) => (
+              <li>
+                <a href={url} rel="noopener" target="_blank" aria-label={red}>
+                  <Icono nombre={red} tam={22} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+    {
+      hayContacto && (
+        <div>
+          <p class="pie-titulo">Contacto</p>
+          <ul class="pie-lista">
+            {c.telefono && <li><a href={tel(c.telefono)}>{c.telefono}</a></li>}
+            {c.whatsapp && <li><a href={whatsapp(c.whatsapp)} rel="noopener" target="_blank">WhatsApp</a></li>}
+            {c.email && <li><a class="break-all" href={`mailto:${c.email}`}>{c.email}</a></li>}
+            {c.direccion && <li><a href={mapa(c.direccion)} rel="noopener" target="_blank">{c.direccion}</a></li>}
+          </ul>
+        </div>
+      )
+    }
+    {
+      site.menu.length > 0 && (
+        <div>
+          <p class="pie-titulo">Web</p>
+          <ul class="pie-lista">
+            {site.menu.map((e) => <li><a href={e.url}>{e.texto}</a></li>)}
+          </ul>
+        </div>
+      )
+    }
+    {
+      (proximo || c.horario) && (
+        <div>
+          {proximo && (
+            <a class="pie-proximo" href={`/#${proximo.ancla}`}>
+              <span class="pie-titulo block">Próximo torneo</span>
+              {proximo.fecha && <span class="pie-proximo-fecha">{proximo.fecha}</span>}
+              <span class="block">{proximo.titulo}</span>
+            </a>
+          )}
+          {c.horario && <p class:list={['text-sm opacity-85', { 'mt-5': proximo }]}>{c.horario}</p>}
+        </div>
+      )
+    }
+  </div>
+  <div class="contenedor pie-legal">
+    <span>© {anio} {site.nombre}</span>
+    <a href="/aviso-legal">Aviso legal y privacidad</a>
+    {
+      site.marca_pie && (
+        <span class="pie-noexpertise">
+          Web creada con <a href="https://noexpertise.com" rel="noopener">NoExpertise</a>
+        </span>
+      )
+    }
+  </div>
+</footer>
+
+<style>
+  .pie-franja { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1.25rem), 0 100%); padding-block: 2rem 3rem; }
+  .pie-franja-fila { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem 2rem; }
+  .pie-franja-texto { font-family: var(--fuente-titulos); font-stretch: 75%; font-style: italic; font-weight: 700; text-transform: uppercase; font-size: clamp(1.6rem, 4vw, 2.75rem); line-height: .95; max-width: 52rem; }
+  .pie-cuerpo { padding-top: 3.5rem; }
+  @media (min-width: 768px) { .pie-cuerpo { grid-template-columns: 1.6fr 1.3fr 1fr 1.2fr; } }
+  .pie-nombre { font-family: var(--fuente-titulos); font-stretch: 75%; font-style: italic; font-weight: 700; text-transform: uppercase; font-size: clamp(2.25rem, 5vw, 3.5rem); line-height: .9; }
+  .pie-redes a { border-radius: 50%; background: color-mix(in srgb, currentColor 14%, transparent); padding: .6rem; }
+  .pie-redes a:hover { background: var(--c-acento); color: var(--sobre-acento); }
+  .pie-proximo { display: block; text-decoration: none; }
+  .pie-proximo-fecha { display: block; font-family: var(--fuente-titulos); font-stretch: 75%; font-style: italic; font-weight: 700; text-transform: uppercase; font-size: 2rem; line-height: 1; color: var(--c-acento); }
+</style>

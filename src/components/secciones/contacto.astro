@@ -1,0 +1,64 @@
+---
+// Contacto partido a sangre, entrando en diagonal: a la izquierda, sobre grafito, titular, teléfono enorme en lima y
+// vías de contacto (WhatsApp, email, dirección con enlace al mapa y horario de site.yaml → contacto); a la derecha, hasta
+// el borde de la ventana, panel azul con líneas de pista y el formulario (nombre, teléfono, email, «Me interesa» con
+// reservar pista, las clases, torneos y las tarifas, y mensaje). `boton_formulario` opcional.
+import { seccion, site, tel, whatsapp, mapa } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+import FormularioContacto from '../ui/FormularioContacto.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const c = site.contacto;
+const botonForm = (s?.boton_formulario as string) || undefined;
+---
+
+{
+  s && (
+    <section id={id} class="banda-grafito corte contacto">
+      <div class="contacto-datos">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        {c.telefono && <a class="contacto-telefono" href={tel(c.telefono)}>{c.telefono}</a>}
+        <ul class="contacto-vias">
+          {c.whatsapp && (
+            <li><a class="contacto-dato" href={whatsapp(c.whatsapp)} rel="noopener" target="_blank"><Icono nombre="whatsapp" class="shrink-0" />WhatsApp</a></li>
+          )}
+          {c.email && (
+            <li><a class="contacto-dato break-all" href={`mailto:${c.email}`}><Icono nombre="correo" class="shrink-0" />{c.email}</a></li>
+          )}
+          {c.direccion && (
+            <li><a class="contacto-dato" href={mapa(c.direccion)} rel="noopener" target="_blank"><Icono nombre="mapa" class="shrink-0" />{c.direccion}</a></li>
+          )}
+          {c.horario && <li class="contacto-dato"><Icono nombre="reloj" class="shrink-0" />{c.horario}</li>}
+        </ul>
+      </div>
+      <div class="contacto-form banda-azul lineas-pista">
+        <FormularioContacto prefijo={`${id}-f`} boton={botonForm} />
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .contacto { display: grid; padding-top: 0; }
+  .contacto-datos { padding: calc(var(--ritmo) + var(--corte)) 1rem var(--ritmo); min-width: 0; }
+  .contacto-telefono { display: inline-block; margin-top: 2rem; font-family: var(--fuente-titulos); font-stretch: 75%; font-style: italic; font-weight: 700; font-size: clamp(2.6rem, 11vw, 5.75rem); line-height: .9; text-decoration: none; color: var(--c-acento); white-space: nowrap; }
+  .contacto-telefono:hover { text-decoration: underline; text-decoration-thickness: 4px; text-underline-offset: 6px; }
+  .contacto-vias { margin-top: 2.25rem; display: grid; gap: 1.1rem; }
+  .contacto-dato { display: flex; align-items: flex-start; gap: .8rem; text-decoration: none; font-size: 1.05rem; }
+  .contacto-dato :global(svg) { color: var(--c-acento); margin-top: .1rem; }
+  a.contacto-dato:hover { text-decoration: underline; }
+  .contacto-form { padding: 2.5rem 1rem 3rem; background-position: 50% 50%; }
+  @media (min-width: 768px) {
+    .contacto-datos { padding: calc(var(--ritmo-md) + var(--corte)) 2rem var(--ritmo-md); }
+    .contacto-form { padding: 3.5rem 2rem; }
+    .contacto-vias { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1024px) {
+    .contacto { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .contacto-datos { padding-left: max(2rem, calc((100vw - 90rem) / 2 + 2rem)); padding-right: 4rem; }
+    .contacto-vias { grid-template-columns: 1fr; }
+    .contacto-form { padding: calc(var(--ritmo-md) + var(--corte)) max(2rem, calc((100vw - 90rem) / 2 + 2rem)) var(--ritmo-md) 6rem; clip-path: polygon(3.5rem 0, 100% 0, 100% 100%, 0 100%); }
+  }
+</style>

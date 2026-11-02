@@ -1,0 +1,57 @@
+[
+  {
+    "fichero": "fotos/hero.jpg",
+    "aspecto": "16:9",
+    "prompt": "Pista de pádel cubierta vista desde una esquina a media altura, paredes de cristal, césped artificial azul con líneas blancas, red en el centro, focos LED encendidos, nave moderna con techo alto, ambiente enérgico, sin gente, sin texto ni logotipos"
+  },
+  {
+    "fichero": "fotos/pista-central.jpg",
+    "aspecto": "3:4",
+    "prompt": "Pista de pádel panorámica de cristal sin pilares con una pequeña grada metálica al lado, césped azul, iluminación LED intensa, encuadre vertical desde el fondo de la pista, sin gente, sin texto ni logotipos"
+  },
+  {
+    "fichero": "fotos/pista-cubierta.jpg",
+    "aspecto": "3:4",
+    "prompt": "Varias pistas de pádel cubiertas en fila dentro de una nave luminosa, césped azul, cristales y mallas metálicas, focos LED en el techo, encuadre vertical en perspectiva, sin gente, sin texto ni logotipos"
+  },
+  {
+    "fichero": "fotos/pista-exterior.jpg",
+    "aspecto": "3:4",
+    "prompt": "Pista de pádel exterior al atardecer con cielo anaranjado, árboles de ribera al fondo, césped azul, cristales con reflejos dorados, encuadre vertical, sin gente, sin texto ni logotipos"
+  },
+  {
+    "fichero": "fotos/pista-individual.jpg",
+    "aspecto": "3:4",
+    "prompt": "Detalle de una pista de pádel estrecha cubierta, una pala de pádel y tres bolas amarillas sobre el césped azul junto a la red, luz lateral, encuadre vertical, sin gente, sin texto ni logotipos"
+  },
+  {
+    "fichero": "fotos/clases.jpg",
+    "aspecto": "4:3",
+    "prompt": "Clase de pádel vista desde detrás de una monitora de espaldas junto a un carro lleno de bolas amarillas, alumnos al fondo desenfocados sin rostros visibles, pista cubierta con césped azul, luz LED, sin texto ni logotipos"
+  },
+  {
+    "fichero": "fotos/galeria-1.jpg",
+    "aspecto": "3:2",
+    "prompt": "Vista aérea cenital de dos pistas de pádel cubiertas con césped azul y líneas blancas, cristales y estructura metálica, composición geométrica, sin gente, sin texto ni logotipos"
+  },
+  {
+    "fichero": "fotos/galeria-2.jpg",
+    "aspecto": "3:2",
+    "prompt": "Vestuario moderno de club deportivo con bancos de madera clara, taquillas grafito y duchas con azulejo blanco, luz cálida, limpio y ordenado, sin gente, sin texto ni logotipos"
+  },
+  {
+    "fichero": "fotos/galeria-3.jpg",
+    "aspecto": "3:2",
+    "prompt": "Pared de una tienda de club de pádel con palas de colores colgadas, paleteros y botes de bolas en estanterías, luz de escaparate, sin gente, sin marcas visibles, sin texto ni logotipos"
+  },
+  {
+    "fichero": "fotos/galeria-4.jpg",
+    "aspecto": "3:2",
+    "prompt": "Terraza de cafetería de un club deportivo al atardecer con mesas altas y taburetes, vistas a una pista de pádel a través de un cristal, guirnaldas de luz, sin gente, sin texto ni logotipos"
+  },
+  {
+    "fichero": "fotos/galeria-5.jpg",
+    "aspecto": "3:2",
+    "prompt": "Primer plano de una bola de pádel amarilla botando sobre césped artificial azul junto a la línea blanca, gotas de luz de los focos, fondo desenfocado de cristal, sin gente, sin texto ni logotipos"
+  }
+]

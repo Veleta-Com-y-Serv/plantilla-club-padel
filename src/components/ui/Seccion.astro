@@ -1,0 +1,33 @@
+---
+// Banda de sección a todo el ancho de la ventana. Adaptado de AstroWind (WidgetWrapper.astro), © onWidget, licencia MIT (LICENSE-ASTROWIND.md).
+// `banda` elige el fondo de color pleno (clara, clara2, grafito, azul o lima); `corte` la hace entrar en diagonal sobre
+// la anterior ('arriba' sube a la derecha, 'inv' sube a la izquierda); `lineas` pinta las líneas de pista de fondo.
+// El contenido va dentro de `.contenedor` (máximo 90 rem, 16 px de margen lateral en móvil). `sinContenedor` para filas a sangre.
+interface Props {
+  id?: string;
+  class?: string;
+  contenedor?: string;
+  banda?: 'clara' | 'clara2' | 'grafito' | 'azul' | 'lima';
+  corte?: 'arriba' | 'inv' | '';
+  lineas?: boolean;
+  etiqueta?: string;
+  sinContenedor?: boolean;
+}
+const { id, class: clase = '', contenedor = '', banda = 'clara', corte = '', lineas = false, etiqueta, sinContenedor = false } = Astro.props;
+---
+
+<section
+  class:list={['seccion', `banda-${banda}`, { corte: corte === 'arriba', 'corte-inv': corte === 'inv', 'lineas-pista': lineas }, clase]}
+  id={id}
+  aria-label={etiqueta}
+>
+  {
+    sinContenedor ? (
+      <slot />
+    ) : (
+      <div class:list={['contenedor', contenedor]}>
+        <slot />
+      </div>
+    )
+  }
+</section>

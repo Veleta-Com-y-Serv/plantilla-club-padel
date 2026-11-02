@@ -1,0 +1,167 @@
+# Contenido de la web. Es lo único que rellena la plataforma NoExpertise.
+# Una sola página: el menú apunta a anclas (#id-de-sección).
+# Las secciones se muestran en el orden de este fichero. Para ocultar una: activa: false.
+# Apartado nuevo: un id propio (es su ancla, /#id) con `tipo:` = el diseño de otra sección o `texto`.
+# Listas planas: nunca una lista dentro de un elemento de lista. Precios siempre entre comillas.
+nombre: Henares Pádel Club
+eslogan: Club de pádel en Guadalajara con pistas cubiertas, escuela y torneos todo el año.
+sector: padel
+logo: ""          # ruta a una imagen en public/ (p. ej. /logo.svg). Vacío = sello azul con la inicial + nombre.
+colores:
+  primario: "#1f4bff"   # azul eléctrico: portada, bandas de pista, botones y pie
+  acento: "#c6f432"     # lima: banda de reservas, marcador, etiquetas y resaltados
+  fondo: "#f3f5f9"      # claro: bandas claras (con fondo oscuro el diseño también funciona)
+  texto: "#16191f"      # grafito: texto y bandas grafito
+contacto:
+  telefono: "949 21 63 08"
+  email: hola@henarespadel.es
+  direccion: Calle de los Frontones 8, 19004 Guadalajara (Guadalajara)
+  horario: "Pistas abiertas de lunes a domingo, de 8:00 a 23:30. Recepción de 9:00 a 22:00."
+  whatsapp: "+34 655 30 81 42"
+redes:
+  instagram: https://www.instagram.com/
+  facebook: ""
+  linkedin: ""
+menu:
+  - { texto: Pistas, url: "/#pistas" }
+  - { texto: Clases, url: "/#clases" }
+  - { texto: Torneos, url: "/#torneos" }
+  - { texto: Socios, url: "/#tarifas" }
+  - { texto: El club, url: "/#instalaciones" }
+  - { texto: Contacto, url: "/#contacto" }
+boton_cabecera: { texto: Reserva pista, url: "/#reservas" }
+seo:
+  titulo: Henares Pádel Club · Pistas de pádel cubiertas en Guadalajara
+  descripcion: "Club de pádel en Guadalajara: seis pistas cubiertas y dos exteriores, escuela para todos los niveles, ligas y torneos. Reserva tu pista online."
+  tipo: SportsActivityLocation
+marca_pie: true
+
+secciones:
+  hero:
+    activa: true
+    antetitulo: Club de pádel · Guadalajara
+    titulo: Tu próximo partido empieza aquí
+    texto: "Ocho pistas de cristal, escuela para todos los niveles y un torneo cada mes. Reserva en un minuto y juega hoy mismo."
+    imagen: /fotos/hero.jpg
+    cta: { texto: Reserva tu pista, url: "/#reservas" }
+    cta_secundario: { texto: Ver clases, url: "/#clases" }
+    items:
+      - { titulo: Pistas cubiertas, icono: pista }
+      - { titulo: Escuela de pádel, icono: pala }
+      - { titulo: Ligas y torneos, icono: trofeo }
+      - { titulo: Cafetería y vestuarios, icono: taza }
+
+  pistas:
+    activa: true
+    antetitulo: Pistas
+    titulo: Ocho pistas, cero excusas
+    texto: "Cristal panorámico, césped de última generación e iluminación LED sin sombras. Cubiertas para el invierno y al aire libre para las tardes de verano."
+    pistas:
+      - { nombre: Pista central, texto: "Panorámica, con grada para veinte personas. La de las finales.", tipo: Cubierta, precio: "24 € / 90 min", imagen: /fotos/pista-central.jpg }
+      - { nombre: "Pistas 1 a 5", texto: "Cubiertas, con césped azul y luz LED regulable.", tipo: Cubierta, precio: "20 € / 90 min", imagen: /fotos/pista-cubierta.jpg }
+      - { nombre: "Pistas 6 y 7", texto: "Al aire libre, con vistas a la ribera. Las favoritas en primavera.", tipo: Exterior, precio: "16 € / 90 min", imagen: /fotos/pista-exterior.jpg }
+      - { nombre: Pista individual, texto: "Más estrecha, para jugar uno contra uno o entrenar.", tipo: Cubierta, precio: "14 € / 60 min", imagen: /fotos/pista-individual.jpg }
+
+  reservas:
+    activa: true
+    antetitulo: Reservas
+    titulo: Reserva en un minuto
+    texto: "Elige día, hora y pista desde el móvil. Si te falta gente, te buscamos pareja de tu nivel."
+    enlace_reservas: "https://reservas.example.com/henares-padel"
+    cta: { texto: Reservar por WhatsApp, url: "https://wa.me/34655308142" }
+    nota: "Puedes cancelar sin coste hasta 12 horas antes."
+    items:
+      - { titulo: Elige día y hora, texto: "Ves las pistas libres al momento." }
+      - { titulo: Paga o reserva, texto: "Con tarjeta o en recepción al llegar." }
+      - { titulo: A jugar, texto: "Palas y bolas de alquiler en recepción." }
+
+  clases:
+    activa: true
+    antetitulo: Escuela
+    titulo: Aprende con quien sabe
+    texto: "Monitores titulados, grupos de cuatro como máximo y vídeo para corregir el golpe. Desde la primera clase hasta la competición."
+    imagen: /fotos/clases.jpg
+    cta: { texto: Pide tu clase de prueba, url: "/#contacto" }
+    clases:
+      - { nombre: Iniciación, texto: "Agarre, posición y los golpes básicos para empezar a jugar partidos.", nivel: Principiante, precio: "45 € / mes", duracion: "1 h a la semana" }
+      - { nombre: Perfeccionamiento, texto: "Bandeja, víbora y salida de pared. Para quien ya juega y quiere dar el salto.", nivel: Intermedio, precio: "55 € / mes", duracion: "1 h a la semana" }
+      - { nombre: Competición, texto: "Táctica, físico y preparación de torneos con análisis en vídeo.", nivel: Avanzado, precio: "80 € / mes", duracion: "2 h a la semana" }
+      - { nombre: Escuela infantil, texto: "De 6 a 14 años, con pala adaptada y mucho juego.", nivel: Niños, precio: "35 € / mes", duracion: "1 h a la semana" }
+      - { nombre: Clase particular, texto: "Tú y el monitor, a tu ritmo y en el horario que elijas.", nivel: Todos, precio: "30 € / sesión", duracion: "60 min" }
+
+  torneos:
+    activa: true
+    antetitulo: Competición
+    titulo: Torneos y ligas
+    texto: "Un torneo cada mes y liga por niveles todo el año. Inscríbete en recepción o por WhatsApp."
+    cta: { texto: Quiero inscribirme, url: "/#contacto" }
+    torneos:
+      - { fecha: "14 nov 2026", titulo: Open de Otoño, categoria: "Masculino y femenino · 2.ª y 3.ª", precio: "25 € por pareja", estado: Inscripción abierta }
+      - { fecha: "28 nov 2026", titulo: Torneo Mixto Solidario, categoria: Mixto · Todos los niveles, precio: "20 € por pareja", estado: Inscripción abierta }
+      - { fecha: "12 dic 2026", titulo: Americano de Navidad, categoria: Individual · Parejas por sorteo, precio: "12 € por persona", estado: Completo }
+      - { fecha: "16 ene 2027", titulo: "Liga de invierno, 1.ª jornada", categoria: Por niveles, precio: "60 € por pareja", estado: Próximamente }
+
+  tarifas:
+    activa: true
+    antetitulo: Hazte socio
+    titulo: Juega más, paga menos
+    texto: "Sin matrícula y sin permanencia. Los socios reservan con siete días de antelación y tienen precio especial en clases y torneos."
+    cta: { texto: Hazte socio, url: "/#contacto" }
+    tarifas:
+      - { nombre: Jugador, precio: "19 €", periodo: al mes, incluye: "Reserva con 7 días; 20 % de descuento en pistas; Taquilla", destacado: false }
+      - { nombre: Socio total, precio: "39 €", periodo: al mes, incluye: "4 partidos al mes incluidos; Reserva con 7 días; Liga interna gratis; 10 % en clases", destacado: true }
+      - { nombre: Familiar, precio: "59 €", periodo: al mes, incluye: "Hasta 4 personas; Escuela infantil con descuento; Reserva con 7 días", destacado: false }
+
+  instalaciones:
+    activa: true
+    antetitulo: El club
+    titulo: Mucho más que pistas
+    texto: "Vestuarios con duchas, tienda con encordado de palas, cafetería con terraza y aparcamiento gratuito para socios y jugadores."
+    items:
+      - { titulo: Vestuarios y duchas, texto: "Con taquillas y secador.", icono: ducha }
+      - { titulo: Tienda y alquiler, texto: "Palas, bolas y paleteros.", icono: tienda }
+      - { titulo: Cafetería con terraza, texto: "Para el tercer tiempo.", icono: taza }
+      - { titulo: Aparcamiento gratuito, texto: "Junto a la entrada.", icono: aparcamiento }
+    galeria:
+      - /fotos/galeria-1.jpg
+      - /fotos/galeria-2.jpg
+      - /fotos/galeria-3.jpg
+      - /fotos/galeria-4.jpg
+      - /fotos/galeria-5.jpg
+
+  cifras:
+    activa: true
+    antetitulo: El marcador
+    titulo: El club en números
+    items:
+      - { titulo: "8", texto: Pistas de cristal }
+      - { titulo: "600", texto: Socios y socias }
+      - { titulo: "12", texto: Torneos al año }
+      - { titulo: "9", texto: Monitores titulados }
+
+  opiniones:
+    activa: true
+    antetitulo: Opiniones
+    titulo: Lo que dicen en la grada
+    testimonios:
+      - { texto: "Las pistas están siempre perfectas y si te falta uno para el partido, te lo encuentran. Es mi segunda casa.", autor: Marta G., nota: Socia desde 2022 }
+      - { texto: "Mi hijo empezó en la escuela infantil y ahora no hay quien le saque de la pista.", autor: Javier R., nota: Padre de alumno }
+      - { texto: "Los torneos están muy bien organizados y siempre hay buen ambiente en la terraza después.", autor: Lucía P., nota: Jugadora de liga }
+
+  preguntas:
+    activa: true
+    antetitulo: Preguntas
+    titulo: Antes de saltar a la pista
+    preguntas:
+      - { pregunta: "¿Hace falta ser socio para reservar?", respuesta: "No. Cualquiera puede reservar pista. Los socios reservan con más antelación y pagan menos." }
+      - { pregunta: "¿Alquiláis palas y bolas?", respuesta: "Sí, en recepción tienes palas de alquiler para todos los niveles y botes de bolas nuevas." }
+      - { pregunta: "No he jugado nunca, ¿por dónde empiezo?", respuesta: "Con una clase de prueba en el grupo de iniciación. Te prestamos la pala y en una hora estarás jugando tus primeros puntos." }
+      - { pregunta: "¿Puedo cancelar una reserva?", respuesta: "Sí, sin coste hasta 12 horas antes. Después, si encuentras quien ocupe la pista, tampoco se cobra." }
+      - { pregunta: "¿Hay clases para niños?", respuesta: "Sí, la escuela infantil es para niños y niñas de 6 a 14 años, por las tardes y los sábados por la mañana." }
+
+  contacto:
+    activa: true
+    antetitulo: Contacto
+    titulo: Nos vemos en la pista
+    texto: "Llámanos, escríbenos o pásate por recepción. Te enseñamos el club y te buscamos partido."
+    boton_formulario: Enviar mensaje

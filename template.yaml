@@ -1,0 +1,94 @@
+# Metadatos de la plantilla para el catálogo de NoExpertise.
+id: club-padel
+nombre: Club de pádel y deporte
+descripcion: "Web enérgica para clubes de pádel y tenis: pistas, reservas, escuela, torneos y tarifas de socio."
+sectores:
+  - { id: padel, nombre: Pádel }
+  - { id: club-deportivo, nombre: Club deportivo }
+  - { id: tenis, nombre: Tenis }
+  - { id: pistas, nombre: Alquiler de pistas }
+  - { id: escuela-deportiva, nombre: Escuela deportiva }
+secciones:
+  - { id: hero, nombre: Portada }
+  - { id: pistas, nombre: Pistas }
+  - { id: reservas, nombre: Reservas }
+  - { id: clases, nombre: Clases y escuela }
+  - { id: torneos, nombre: Torneos y ligas }
+  - { id: tarifas, nombre: Tarifas de socio }
+  - { id: instalaciones, nombre: Instalaciones }
+  - { id: cifras, nombre: Cifras }
+  - { id: opiniones, nombre: Opiniones }
+  - { id: preguntas, nombre: Preguntas frecuentes }
+  - { id: contacto, nombre: Contacto }
+estilo: energico
+plan_minimo: gratis
+version: 1.0.0
+base: astrowind
+demo_url: https://demo-plantilla-club-padel.noexpertise.com
+activa: true
+orden: 570
+
+# Asistente de puesta en marcha (NoExpertise): un paso por pantalla. Rutas del site sin índices;
+# tipos: texto y lista (la IA propone), datos, fotos, eleccion (colores y logo) y repaso.
+asistente:
+  - id: negocio
+    titulo: "Tu club"
+    pregunta: "¿Cómo se llama tu club y qué ofrece? ¿Dónde está?"
+    ayuda: "Qué deportes, cuántas pistas, si hay escuela o torneos y en qué localidad."
+    tipo: texto
+    campos: [nombre, eslogan, secciones.hero.antetitulo, secciones.hero.titulo, secciones.hero.texto, secciones.hero.items, seo.titulo, seo.descripcion]
+  - id: contacto
+    titulo: "Cómo te encuentran"
+    pregunta: "¿Cómo pueden llamarte, escribirte o reservar pista?"
+    ayuda: "Si reservas con una aplicación o web de reservas, pon su enlace. Lo que dejes vacío no sale en tu web."
+    tipo: datos
+    campos: [contacto.telefono, contacto.whatsapp, contacto.email, contacto.direccion, contacto.horario, secciones.reservas.enlace_reservas, redes.instagram, redes.facebook]
+  - id: pistas
+    titulo: "Tus pistas"
+    pregunta: "¿Qué pistas tienes? Nombre, si es cubierta o exterior y el precio de la hora si quieres. Una por línea."
+    ayuda: "Si lo prefieres, añádelas luego en Contenido con su foto."
+    tipo: lista
+    campos: [secciones.pistas.pistas]
+  - id: reservas
+    titulo: "Cómo se reserva"
+    pregunta: "¿Cómo se reserva una pista en tu club? ¿Se puede cancelar?"
+    tipo: texto
+    campos: [secciones.reservas.titulo, secciones.reservas.texto, secciones.reservas.items]
+  - id: clases
+    titulo: "Clases y escuela"
+    pregunta: "¿Qué clases das? Nombre, nivel, cuánto duran y el precio si quieres. Una por línea."
+    ayuda: "Si lo prefieres, añádelas luego en Contenido."
+    tipo: lista
+    campos: [secciones.clases.clases]
+  - id: torneos
+    titulo: "Torneos y ligas"
+    pregunta: "¿Qué torneos o ligas tienes programados? Fecha, nombre, categoría y precio de inscripción. Uno por línea."
+    ayuda: "Si lo prefieres, añádelos luego en Contenido."
+    tipo: lista
+    campos: [secciones.torneos.torneos]
+  - id: tarifas
+    titulo: "Tarifas de socio"
+    pregunta: "¿Tienes cuotas de socio o abonos? Nombre, precio, cada cuánto y qué incluye."
+    ayuda: "Si lo prefieres, añádelas luego en Contenido."
+    tipo: lista
+    campos: [secciones.tarifas.tarifas]
+  - id: preguntas
+    titulo: "Preguntas frecuentes"
+    pregunta: "¿Qué te preguntan antes de venir a jugar? Escribe cada pregunta y lo que respondes."
+    ayuda: "Si lo prefieres, añádelas luego en Contenido."
+    tipo: lista
+    campos: [secciones.preguntas.preguntas]
+  - id: fotos
+    titulo: "Tus fotos"
+    pregunta: "Pon una foto de portada de tus pistas y, si quieres, alguna más de las clases y del club."
+    ayuda: "Sube las tuyas o elige una del banco. Las que no cambies se quedan como están."
+    tipo: fotos
+    campos: [secciones.hero.imagen, secciones.clases.imagen, secciones.instalaciones.galeria]
+  - id: aspecto
+    titulo: "Colores y logo"
+    pregunta: "Elige los colores de tu web y, si tienes, tu logo."
+    tipo: eleccion
+    campos: [colores.primario, colores.acento, logo]
+  - id: repaso
+    titulo: "Repaso"
+    tipo: repaso

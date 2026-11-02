@@ -1,0 +1,57 @@
+---
+// Pistas sobre grafito: titular partido y, debajo, una fila de fotos altas de borde a borde separadas por rayas lima
+// (hasta 4 por fila en escritorio). Cada pista: `pistas: [{nombre, texto, tipo, precio, imagen}]`; `tipo` «Cubierta»
+// (etiqueta azul) o «Exterior» (etiqueta lima), libre. Sin precio no hay precio; sin foto, líneas de pista. `cta` opcional.
+import { seccion } from '../../data/site';
+import { altFicha } from '../../lib/seo';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const pistas = s?.pistas ?? [];
+const exterior = (t?: string) => /exterior|aire|descubiert/i.test(t ?? '');
+---
+
+{
+  s && (
+    <section id={id} class:list={['seccion banda-grafito pistas', { 'pistas--con-fichas': pistas.length > 0 }]}>
+      <div class="contenedor">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} partido />
+        {s.cta && <p class="mt-8"><a class="btn" href={s.cta.url}>{s.cta.texto}</a></p>}
+      </div>
+      {pistas.length > 0 && (
+        <ul class="pistas-rejilla" style={`--n:${Math.min(pistas.length, 4)}`}>
+          {pistas.map((p) => (
+            <li class="pista foto-pista">
+              {p.imagen && <Imagen src={p.imagen} alt={altFicha(p)} ancho={720} alto={960} />}
+              <div class="pista-info">
+                {p.tipo && <span class:list={['chip', { 'chip--azul': !exterior(p.tipo) }]}>{p.tipo}</span>}
+                <h3 class="pista-nombre">{p.nombre}</h3>
+                {p.texto && <p class="pista-texto">{p.texto}</p>}
+                {p.precio && <p class="pista-precio">{p.precio}</p>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  )
+}
+
+<style>
+  .pistas--con-fichas { padding-bottom: 0 !important; }
+  .pistas-rejilla { margin-top: 3rem; display: grid; gap: 4px; background: var(--c-acento); border-top: 4px solid var(--c-acento); }
+  @media (min-width: 640px) { .pistas-rejilla { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1100px) { .pistas-rejilla { grid-template-columns: repeat(var(--n), minmax(0, 1fr)); margin-top: 4rem; } }
+  .pista { position: relative; overflow: hidden; aspect-ratio: 4 / 3.4; display: flex; align-items: flex-end; }
+  @media (min-width: 1100px) { .pista { aspect-ratio: auto; height: clamp(28rem, 36vw, 36rem); } }
+  .pista :global(img) { position: absolute; inset: 0; transition: transform .5s ease; }
+  .pista:hover :global(img) { transform: scale(1.05); }
+  .pista::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, var(--grafito) 0, color-mix(in srgb, var(--grafito) 70%, transparent) 38%, transparent 70%); }
+  .pista-info { position: relative; z-index: 1; padding: 1.5rem 1rem 1.6rem; width: 100%; }
+  @media (min-width: 768px) { .pista-info { padding: 2rem 1.75rem; } }
+  .pista-nombre { margin-top: .7rem; font-size: clamp(2rem, 3vw, 2.6rem); }
+  .pista-texto { margin-top: .5rem; font-size: .98rem; opacity: .9; max-width: 30rem; }
+  .pista-precio { margin-top: .9rem; display: inline-block; font-family: var(--fuente-titulos); font-stretch: 75%; font-style: italic; font-weight: 700; font-size: 1.5rem; color: var(--c-acento); }
+</style>

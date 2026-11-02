@@ -1,0 +1,67 @@
+---
+// Apartado de texto genérico sobre claro: antetítulo, título condensado en cursiva, párrafos, lista (`items` con icono
+// en sello azul) y botón. Con `imagen`, fila 50/50 con la foto a sangre hasta el borde izquierdo y cortada en diagonal.
+// Lo usan los apartados nuevos que pide el cliente (site.yaml: `tipo: texto`).
+import { seccion, parrafos } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+---
+
+{
+  s && (
+    <section id={id} class:list={['banda-clara texto-banda', { 'texto-banda--foto': s.imagen }]}>
+      {s.imagen && (
+        <div class="texto-foto foto-pista">
+          <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1400} alto={1050} />
+        </div>
+      )}
+      <div class="texto-cuerpo">
+        <div class:list={['texto-interior', { contenedor: !s.imagen }]}>
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          {s.titulo && <h2 class="titulo-seccion">{s.titulo}</h2>}
+          <div class="mt-6 max-w-3xl space-y-4 text-lg opacity-90">
+            {parrafos(s.texto).map((p) => <p>{p}</p>)}
+          </div>
+          {s.items.length > 0 && (
+            <ul class="texto-items">
+              {s.items.map((it) => (
+                <li class="flex gap-4">
+                  <span class="texto-icono"><Icono nombre={it.icono || 'check'} tam={22} /></span>
+                  <div>
+                    <p class="texto-item-titulo">{it.titulo}</p>
+                    {it.texto && <p class="mt-1 text-sm opacity-80">{it.texto}</p>}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+          {s.cta?.url && <p class="mt-10"><a class="btn" href={s.cta.url}>{s.cta.texto}</a></p>}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .texto-banda { display: grid; border-top: 4px solid var(--c-acento); }
+  .texto-foto { aspect-ratio: 16 / 10; clip-path: polygon(0 0, 100% 0, 100% 86%, 0 100%); }
+  .texto-cuerpo { display: flex; align-items: center; }
+  .texto-interior { width: 100%; padding-block: var(--ritmo); }
+  .texto-banda--foto .texto-interior { padding-inline: 1rem; }
+  .texto-items { margin-top: 2rem; display: grid; gap: 1.5rem; }
+  @media (min-width: 640px) { .texto-items { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .texto-icono { display: inline-grid; place-items: center; flex-shrink: 0; width: 2.75rem; height: 2.75rem; border-radius: var(--radio); background: var(--c-primario); color: var(--sobre-primario); transform: skewX(-12deg); }
+  .texto-item-titulo { font-family: var(--fuente-titulos); font-stretch: 75%; font-style: italic; font-weight: 700; text-transform: uppercase; font-size: 1.5rem; line-height: 1; }
+  @media (min-width: 768px) {
+    .texto-interior { padding-block: var(--ritmo-md); }
+  }
+  @media (min-width: 1024px) {
+    .texto-banda--foto { grid-template-columns: 1fr 1fr; min-height: 34rem; }
+    .texto-foto { aspect-ratio: auto; height: 100%; clip-path: polygon(0 0, 100% 0, 86% 100%, 0 100%); }
+    .texto-banda--foto .texto-interior { max-width: 45rem; margin-right: auto; padding-inline: clamp(2rem, 4vw, 4rem) 2rem; }
+  }
+</style>

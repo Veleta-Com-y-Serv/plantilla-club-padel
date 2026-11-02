@@ -1,0 +1,75 @@
+---
+// Escuela sobre claro: con `imagen`, fila partida con la foto a sangre hasta el borde izquierdo y cortada en diagonal
+// (en móvil, arriba con el corte abajo); al lado, titular y las clases en filas de marcador:
+// `clases: [{nombre, texto, nivel, precio, duracion}]`. Sin foto, las clases van a dos columnas. Sin precio no hay
+// precio. `cta` opcional (clase de prueba).
+import { seccion } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const clases = s?.clases ?? [];
+---
+
+{
+  s && (
+    <section id={id} class:list={['banda-clara clases', { 'clases--foto': s.imagen }]}>
+      {s.imagen && (
+        <div class="clases-foto foto-pista">
+          <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1200} alto={900} />
+        </div>
+      )}
+      <div class:list={['clases-cuerpo', { contenedor: !s.imagen }]}>
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        {clases.length > 0 && (
+          <ul class="clases-lista">
+            {clases.map((c) => (
+              <li class="clase">
+                <div class="min-w-0">
+                  <div class="clase-cab">
+                    <h3 class="clase-nombre">{c.nombre}</h3>
+                    {c.nivel && <span class="chip chip--azul">{c.nivel}</span>}
+                  </div>
+                  {c.texto && <p class="clase-texto">{c.texto}</p>}
+                  {c.duracion && (
+                    <p class="clase-duracion"><Icono nombre="cronometro" tam={18} />{c.duracion}</p>
+                  )}
+                </div>
+                {c.precio && <p class="clase-precio">{c.precio}</p>}
+              </li>
+            ))}
+          </ul>
+        )}
+        {s.cta && <p class="mt-9"><a class="btn" href={s.cta.url}>{s.cta.texto}</a></p>}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .clases { display: grid; }
+  .clases-foto { aspect-ratio: 16 / 10; clip-path: polygon(0 0, 100% 0, 100% 84%, 0 100%); }
+  .clases-cuerpo { padding-block: var(--ritmo); }
+  .clases--foto .clases-cuerpo { padding-inline: 1rem; padding-top: 2.5rem; }
+  .clases-lista { margin-top: 2.5rem; display: grid; column-gap: 3rem; }
+  .clase { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; align-items: start; padding-block: 1.25rem; border-top: 2px solid var(--linea); }
+  .clase-cab { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; }
+  .clase-nombre { font-size: clamp(1.6rem, 2.4vw, 2.1rem); }
+  .clase-texto { margin-top: .45rem; font-size: .98rem; opacity: .85; }
+  .clase-duracion { margin-top: .5rem; display: inline-flex; align-items: center; gap: .4rem; font-size: .9rem; font-weight: 600; color: var(--resalte-texto); }
+  .clase-precio { font-family: var(--fuente-titulos); font-stretch: 75%; font-style: italic; font-weight: 700; font-size: clamp(1.3rem, 2vw, 1.75rem); line-height: 1; white-space: nowrap; text-align: right; color: var(--resalte-texto); }
+  @media (max-width: 479px) {
+    .clase { grid-template-columns: 1fr; gap: .5rem; }
+    .clase-precio { text-align: left; }
+  }
+  .clases:not(.clases--foto) .clases-lista { grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr)); }
+  @media (min-width: 768px) { .clases-cuerpo { padding-block: var(--ritmo-md); } }
+  @media (min-width: 1024px) {
+    .clases--foto { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .clases-foto { aspect-ratio: auto; height: 100%; min-height: 40rem; clip-path: polygon(0 0, 100% 0, 84% 100%, 0 100%); }
+    .clases--foto .clases-cuerpo { max-width: 46rem; padding: var(--ritmo-md) clamp(2rem, 4vw, 4rem) var(--ritmo-md) 2rem; }
+  }
+</style>

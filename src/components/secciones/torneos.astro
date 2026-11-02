@@ -1,0 +1,77 @@
+---
+// Torneos sobre azul con las líneas de pista, entrando en diagonal: titular partido y cuadro de torneos en filas de
+// todo el ancho: `torneos: [{fecha, titulo, categoria, precio, estado}]`. La fecha va en un bloque lima inclinado (el
+// número en grande); `estado` «Inscripción abierta» (lima), «Completo» (tachado) u otro (contorno). Sin torneos, el
+// titular y el `cta`. Pon los torneos en orden: el primero sale en el marcador de la portada y en el pie.
+import { seccion, partirFecha, claseEstado } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const torneos = s?.torneos ?? [];
+---
+
+{
+  s && (
+    <section id={id} class="seccion banda-azul corte lineas-pista torneos">
+      <div class="contenedor">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} partido />
+        {torneos.length > 0 && (
+          <ol class="torneos-lista">
+            {torneos.map((t) => {
+              const f = partirFecha(t.fecha);
+              const estado = claseEstado(t.estado);
+              return (
+                <li class:list={['torneo', `torneo--${estado}`]}>
+                  {t.fecha && (
+                    <p class="torneo-fecha">
+                      <span class="torneo-fecha-in">
+                        {f.dia && <span class="torneo-dia">{f.dia}</span>}
+                        {f.resto && <span class="torneo-resto">{f.resto}</span>}
+                      </span>
+                    </p>
+                  )}
+                  <div class="torneo-info">
+                    <h3 class="torneo-titulo">{t.titulo}</h3>
+                    {t.categoria && <p class="torneo-categoria">{t.categoria}</p>}
+                  </div>
+                  {(t.precio || t.estado) && (
+                    <div class="torneo-meta">
+                      {t.precio && <p class="torneo-precio">{t.precio}</p>}
+                      {t.estado && <span class:list={['chip', { 'chip--contorno': estado !== 'abierto' }]}>{t.estado}</span>}
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+        )}
+        {s.cta && <p class="mt-10"><a class="btn" href={s.cta.url}>{s.cta.texto}</a></p>}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .torneos-lista { margin-top: 3rem; border-bottom: 2px solid color-mix(in srgb, currentColor 25%, transparent); }
+  .torneo { display: grid; grid-template-columns: 5.25rem minmax(0, 1fr); gap: .9rem 1.25rem; align-items: center; padding-block: 1.4rem; border-top: 2px solid color-mix(in srgb, currentColor 25%, transparent); }
+  .torneo-fecha { grid-row: span 2; align-self: start; }
+  .torneo-fecha-in { display: grid; place-items: center; text-align: center; padding: .55rem .4rem; background: var(--c-acento); color: var(--sobre-acento); border-radius: var(--radio); transform: skewX(-8deg); font-family: var(--fuente-titulos); font-stretch: 75%; font-weight: 700; text-transform: uppercase; line-height: 1; }
+  .torneo-dia { font-size: 2.6rem; line-height: .9; font-variant-numeric: tabular-nums; }
+  .torneo-resto { font-size: .85rem; letter-spacing: .06em; margin-top: .2rem; }
+  .torneo-titulo { font-size: clamp(1.75rem, 3.2vw, 2.75rem); }
+  .torneo-categoria { margin-top: .35rem; font-size: .98rem; opacity: .88; }
+  .torneo-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; }
+  .torneo-precio { font-family: var(--fuente-titulos); font-stretch: 75%; font-style: italic; font-weight: 700; text-transform: uppercase; font-size: 1.35rem; line-height: 1; }
+  .torneo--completo .torneo-titulo { text-decoration: line-through; text-decoration-thickness: 3px; opacity: .7; }
+  .torneo--completo .torneo-fecha-in { background: transparent; color: inherit; box-shadow: inset 0 0 0 2px currentColor; }
+  .torneo:not(:has(.torneo-fecha)) { grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 768px) {
+    .torneo { grid-template-columns: 7.5rem minmax(0, 1fr) auto; gap: 2rem; padding-block: 1.6rem; }
+    .torneo-fecha { grid-row: auto; align-self: center; }
+    .torneo-dia { font-size: 3.4rem; }
+    .torneo-meta { flex-direction: column; align-items: flex-end; text-align: right; }
+    .torneo-precio { font-size: 1.6rem; }
+    .torneo:not(:has(.torneo-fecha)) { grid-template-columns: minmax(0, 1fr) auto; }
+  }
+</style>

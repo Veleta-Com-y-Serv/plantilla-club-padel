@@ -1,0 +1,60 @@
+---
+// Reservas sobre lima, entrando en diagonal: titular, `texto`, botón «Reservar online» si hay `enlace_reservas` (la web o
+// aplicación de reservas del club, se abre aparte), `cta` (p. ej. WhatsApp) y `nota`; a la derecha, los pasos
+// (`items: [{titulo, texto}]`) con número grande en cursiva. Sin enlace de reservas ni `cta`, solo los pasos y el texto.
+import { seccion, esExterno } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+// `enlace_reservas` (el editor lo trata como destino); se acepta también `url_reservas` por compatibilidad.
+const enlace = String(s?.enlace_reservas || s?.url_reservas || '').trim();
+---
+
+{
+  s && (
+    <section id={id} class="seccion banda-lima corte lineas-pista reservas">
+      <div class:list={['contenedor reservas-rejilla', { 'reservas-rejilla--pasos': s.items.length > 0 }]}>
+        <div>
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+          {(enlace || s.cta) && (
+            <div class="botones mt-9">
+              {enlace && (
+                <a class="btn" href={enlace} {...(esExterno(enlace) ? { target: '_blank', rel: 'noopener' } : {})}>Reservar online</a>
+              )}
+              {s.cta && (
+                <a class:list={[enlace ? 'btn-sec' : 'btn']} href={s.cta.url} {...(esExterno(s.cta.url) ? { target: '_blank', rel: 'noopener' } : {})}>{s.cta.texto}</a>
+              )}
+            </div>
+          )}
+          {s.nota && <p class="reservas-nota">{s.nota}</p>}
+        </div>
+        {s.items.length > 0 && (
+          <ol class="reservas-pasos">
+            {s.items.map((it, i) => (
+              <li>
+                <span class="reservas-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <p class="reservas-paso">{it.titulo}</p>
+                  {it.texto && <p class="mt-1">{it.texto}</p>}
+                </div>
+              </li>
+            ))}
+          </ol>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .reservas { background-position: 100% 50%; }
+  .reservas-rejilla { display: grid; gap: 3rem; }
+  @media (min-width: 1024px) { .reservas-rejilla--pasos { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 5rem; align-items: center; } }
+  .reservas-nota { margin-top: 1.25rem; font-size: .95rem; font-weight: 600; }
+  .reservas-pasos { display: grid; gap: 0; }
+  .reservas-pasos li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.25rem; align-items: center; padding-block: 1.25rem; border-top: 2px solid color-mix(in srgb, currentColor 22%, transparent); }
+  .reservas-pasos li:last-child { border-bottom: 2px solid color-mix(in srgb, currentColor 22%, transparent); }
+  .reservas-num { font-family: var(--fuente-titulos); font-stretch: 75%; font-style: italic; font-weight: 700; font-size: clamp(3.25rem, 7vw, 5rem); line-height: .85; color: var(--resalte); min-width: 2ch; }
+  .reservas-paso { font-family: var(--fuente-titulos); font-stretch: 75%; font-style: italic; font-weight: 700; text-transform: uppercase; font-size: clamp(1.5rem, 2.6vw, 2rem); line-height: 1; }
+</style>

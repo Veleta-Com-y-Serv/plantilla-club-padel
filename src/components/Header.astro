@@ -1,0 +1,53 @@
+---
+// Cabecera fija a todo el ancho, siempre sólida y clara, con filete azul abajo: sello azul inclinado con la inicial +
+// nombre en condensada cursiva (o logo), menú (site.yaml → menu) y botón redondo (site.yaml → boton_cabecera).
+// Hasta 1150 px, menú plegable con <details> (abre sin JavaScript). El aspecto está en src/styles/global.css (.cabecera--<variante>).
+import { site } from '../data/site';
+import type { Enlace } from '../data/site';
+interface Props { variante?: string; cta?: Enlace | null }
+const { variante = 'pista', cta = null } = Astro.props;
+---
+
+<header class={`cabecera cabecera--${variante}`} data-cabecera>
+  <div class="contenedor cabecera-fila">
+    <a href="/" class="marca" aria-label={`${site.nombre}, inicio`}>
+      {
+        site.logo ? (
+          <img src={site.logo} alt={site.nombre} class="marca-logo" width="160" height="40" />
+        ) : (
+          <>
+            <span class="marca-inicial" aria-hidden="true">{site.nombre.trim().charAt(0)}</span>
+            <span class="marca-nombre">{site.nombre}</span>
+          </>
+        )
+      }
+    </a>
+    {
+      site.menu.length > 0 && (
+        <nav class="cabecera-nav" aria-label="Menú principal">
+          {site.menu.map((e) => <a href={e.url}>{e.texto}</a>)}
+        </nav>
+      )
+    }
+    {cta && cta.url && <a href={cta.url} class="btn cabecera-cta">{cta.texto}</a>}
+    {
+      (site.menu.length > 0 || (cta && cta.url)) && (
+        <details class="menu-movil">
+          <summary aria-label="Abrir el menú">
+            <span class="menu-movil-icono" aria-hidden="true" />
+            <span>Menú</span>
+          </summary>
+          <nav class="menu-movil-panel" aria-label="Menú">
+            {site.menu.map((e) => <a href={e.url}>{e.texto}</a>)}
+            {cta && cta.url && <a href={cta.url} class="btn">{cta.texto}</a>}
+          </nav>
+        </details>
+      )
+    }
+  </div>
+</header>
+<script is:inline>
+  document.querySelectorAll('.menu-movil a').forEach(function (a) {
+    a.addEventListener('click', function () { a.closest('details').open = false; });
+  });
+</script>

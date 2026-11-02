@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base titulo="Página no encontrada">
+  <section class="banda-azul lineas-pista error-banda">
+    <div class="contenedor error-cuerpo">
+      <p class="antetitulo">Error 404</p>
+      <p class="error-cifra" aria-hidden="true">404</p>
+      <h1 class="titulo-seccion">Bola fuera</h1>
+      <p class="mt-5 max-w-xl text-lg">Puede que el enlace esté mal o que la página se haya movido. Vuelve al inicio y reserva tu pista.</p>
+      <p class="mt-10"><a class="btn" href="/">Volver al inicio</a></p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .error-banda { min-height: calc(85svh - var(--alto-cabecera)); display: flex; align-items: center; overflow: hidden; }
+  .error-cuerpo { padding-block: 4rem; }
+  .error-cifra { margin-top: .5rem; font-family: var(--fuente-titulos); font-stretch: 75%; font-style: italic; font-weight: 700; font-size: clamp(8rem, 40vw, 22rem); line-height: .8; color: transparent; -webkit-text-stroke: 3px var(--c-acento); }
+</style>

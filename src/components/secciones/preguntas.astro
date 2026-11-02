@@ -1,0 +1,56 @@
+---
+// Preguntas frecuentes sobre claro con las líneas de pista: titular a la izquierda (fijo al hacer scroll en escritorio)
+// y acordeón nativo <details> a la derecha, pregunta en condensada cursiva y botón redondo azul con «+» que gira, sin
+// JavaScript. `preguntas: [{pregunta, respuesta}]`; sin preguntas no se pinta.
+import { seccion, parrafos } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const lista = (s?.preguntas ?? []).filter((p) => p.pregunta);
+---
+
+{
+  s && lista.length > 0 && (
+    <section id={id} class="seccion banda-clara2 lineas-pista preguntas">
+      <div class="contenedor preguntas-rejilla">
+        <div class="preguntas-cab">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        </div>
+        <div class="preguntas-lista">
+          {lista.map((p, i) => (
+            <details open={i === 0}>
+              <summary>
+                <span>{p.pregunta}</span>
+                <span class="preguntas-mas" aria-hidden="true" />
+              </summary>
+              <div class="preguntas-respuesta">
+                {parrafos(p.respuesta).map((t) => <p>{t}</p>)}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .preguntas-rejilla { display: grid; gap: 2.5rem; }
+  @media (min-width: 1024px) {
+    .preguntas-rejilla { grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: 5rem; align-items: start; }
+    .preguntas-cab { position: sticky; top: calc(var(--alto-cabecera) + 2rem); }
+  }
+  .preguntas-lista details { border-top: 2px solid var(--linea); }
+  .preguntas-lista details:last-child { border-bottom: 2px solid var(--linea); }
+  .preguntas-lista summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.25rem; min-height: 2.75rem; font-family: var(--fuente-titulos); font-stretch: 75%; font-style: italic; font-weight: 700; text-transform: uppercase; font-size: clamp(1.3rem, 2.2vw, 1.75rem); line-height: 1.05; }
+  .preguntas-lista summary::-webkit-details-marker { display: none; }
+  .preguntas-lista summary:hover { color: var(--resalte-texto); }
+  .preguntas-mas { position: relative; flex-shrink: 0; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--c-primario); transition: transform .2s ease, background-color .2s ease; }
+  .preguntas-mas::before, .preguntas-mas::after { content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 2.5px; margin: -1.25px 0 0 -7px; background: var(--sobre-primario); }
+  .preguntas-mas::after { transform: rotate(90deg); }
+  details[open] .preguntas-mas { transform: rotate(45deg); background: var(--c-acento); }
+  details[open] .preguntas-mas::before, details[open] .preguntas-mas::after { background: var(--sobre-acento); }
+  .preguntas-respuesta { padding: 0 3.5rem 1.5rem 0; display: grid; gap: .75rem; font-size: 1.05rem; opacity: .9; }
+  @media (max-width: 639px) { .preguntas-respuesta { padding-right: 0; } }
+</style>
