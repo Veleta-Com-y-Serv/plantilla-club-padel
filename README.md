@@ -7,6 +7,7 @@ Web enérgica para clubes de pádel y tenis: pistas, reservas, escuela, torneos 
 - Campos propios: `pistas[]` (nombre, texto, tipo, precio, imagen), `reservas.enlace_reservas` (enlace externo opcional), `clases[]` (nombre, texto, nivel, precio, duracion), `torneos[]` (fecha, titulo, categoria, precio, estado), `tarifas[]` (nombre, precio, periodo, incluye con «;», destacado) y `contacto.boton_formulario`.
 - A ancho completo: portada a pantalla completa con foto a sangre, panel azul en diagonal con líneas de pista, marcador del próximo torneo y franja lima; pistas en fotos altas de borde a borde; reservas sobre lima; escuela con foto a sangre cortada en diagonal; cuadro de torneos sobre azul; tarifas en columnas sobre grafito; mosaico de instalaciones sin márgenes; cifras en marcador; contacto partido con panel azul hasta el borde.
 - SEO de base incluido (`src/lib/seo.ts`): canónica, og:image, JSON-LD del negocio (`SportsActivityLocation`) y de las preguntas frecuentes, `robots.txt`, `sitemap.xml` y `llms.txt`; `noindex` si `seo.indexable: false`.
+- Varias páginas (opcional, `paginas:` en la raíz de `site.yaml`): Inicio + una página por entrada (`{ ruta, titulo, secciones: "a; b" }`, hasta 6) con el menú hecho solo; reparto recomendado en `template.yaml → paginas`. Sin la clave, una sola página larga.
 - Contenido editable en `site.yaml`; metadatos en `template.yaml`; reglas para el agente en `CLAUDE.md`; brief de diseño en `DISEÑO.md`; fotos a generar en `fotos.json`.
 
 ```

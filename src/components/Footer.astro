@@ -4,6 +4,7 @@
 // torneo con el horario). «Web creada con NoExpertise» se muestra si site.yaml → marca_pie no es false.
 import { site, tel, mapa, whatsapp, proximoTorneo } from '../data/site';
 import Icono from './ui/Icono.astro';
+import { rutaDeSeccion } from '../lib/multipagina';
 interface Props { variante?: string }
 const { variante = 'azul' } = Astro.props;
 const c = site.contacto;
@@ -69,7 +70,7 @@ const cta = site.boton_cabecera;
       (proximo || c.horario) && (
         <div>
           {proximo && (
-            <a class="pie-proximo" href={`/#${proximo.ancla}`}>
+            <a class="pie-proximo" href={rutaDeSeccion(proximo.ancla)}>
               <span class="pie-titulo block">Próximo torneo</span>
               {proximo.fecha && <span class="pie-proximo-fecha">{proximo.fecha}</span>}
               <span class="block">{proximo.titulo}</span>
